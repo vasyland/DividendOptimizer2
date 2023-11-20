@@ -3,21 +3,34 @@ package com.stock.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.stock.repositories.SymbolRepository;
+
+import com.stock.model.SymbolStatus;
+import com.stock.repositories.SymbolNativeRepository;
+import com.stock.repositories.SymbolStatusRepository;
 
 @Service
 public class SymbolServiceImpl implements SymbolService {
 
-	private SymbolRepository symbolRepository;
+	private SymbolNativeRepository symbolNativeRepository1;
+	private SymbolStatusRepository symbolStatusRepository;
 	
-	public SymbolServiceImpl(SymbolRepository symbolRepository) {
+	
+
+	public SymbolServiceImpl(SymbolNativeRepository symbolNativeRepository1,
+			com.stock.repositories.SymbolStatusRepository symbolStatusRepository) {
 		super();
-		this.symbolRepository = symbolRepository;
+		this.symbolNativeRepository1 = symbolNativeRepository1;
+		this.symbolStatusRepository = symbolStatusRepository;
 	}
 
 	@Override
 	public List<String> getSymbols() {
-		return symbolRepository.getSymbolForProcessing();
+		return symbolNativeRepository1.getSymbolForProcessing();
 	}
 
+	@Override
+	public List<SymbolStatus> getRecomendedBuySymbols() {
+		return symbolStatusRepository.getSymbolsByRecommendedAction("Buy");
+	}
+	
 }

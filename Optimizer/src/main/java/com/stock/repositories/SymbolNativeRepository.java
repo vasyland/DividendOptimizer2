@@ -1,19 +1,18 @@
 package com.stock.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.stock.data.Symbol;
+import com.stock.model.SymbolStatus;
 
 import jakarta.persistence.EntityManager;
+import com.stock.model.SymbolStatus;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
 
 @Repository
-public class SymbolRepository {
+public class SymbolNativeRepository {
 
 	@PersistenceContext
 	EntityManager entityManager = null;
@@ -42,5 +41,27 @@ public class SymbolRepository {
 	    return sql3.getResultList();
 	}
 
+	/**
+	 * Getting recommended Buy List
+	 * @return
+	 */
+	public List<SymbolStatus> getRecomendedBuySymbols() {
+		
+		Query sql = entityManager.createNativeQuery("SELECT SYMBOL, "
+				+ "CURRENT_PRICE, "
+				+ "QUOTERLY_DIVIDEND_AMOUNT, "
+				+ "CURRENT_YIELD, "
+				+ "UPPER_YIELD, "
+				+ "LOWER_YIELD, "
+				+ "ALLOWEDTOBUY_YIELD, "
+				+ "SELL_POINT_YIELD, "
+				+ "RECOMMENDED_ACTION, "
+				+ "UPDATED_ON "
+				+ "FROM SYMBOL_STATUS "
+				+ "WHERE RECOMMENDED_ACTION = 'Buy' ORDER BY SYMBOL");
+		
+	    return sql.getResultList();
+	}
+	
 //	List<Symbol> getSymbolsForProcessing();
 }

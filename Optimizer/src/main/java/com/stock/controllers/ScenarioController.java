@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.stock.data.Symbol;
 import com.stock.model.Scenario;
+import com.stock.model.SymbolStatus;
 import com.stock.services.ScenarioService;
 import com.stock.services.SymbolService;
 
@@ -51,6 +53,15 @@ public class ScenarioController {
 		return new ResponseEntity<List<String>>(s, HttpStatus.OK);
 	}
 	
+	@GetMapping("/recommended-symbols")
+	public @ResponseBody List<SymbolStatus> getBuyRecommendedSymbols() {
+		List<SymbolStatus> s = symbolService.getRecomendedBuySymbols();
+//		if (s == null || s.size() == 0) {
+//		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+//		}
+		//return new ResponseEntity<>(s, HttpStatus.OK);
+		return s;
+	}
 	
 	@GetMapping("/allscenarios")
 	public ResponseEntity<List<Scenario>> getAllScenarios() {
