@@ -27,6 +27,12 @@ import com.stock.utils.Utility;
 import com.stock.yahoo.CurrentYahooData;
 import com.stock.yahoo.SymbolCurrentState;
 
+
+/**
+ * NOT IN USE - DELETE IT
+ * @author vasyl
+ *
+ */
 @Service
 public class CalculationServiceImpl implements CalculationService {
 

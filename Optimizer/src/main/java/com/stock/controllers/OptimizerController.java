@@ -19,26 +19,36 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.stock.data.DesicionData;
 import com.stock.data.UserPosition;
-import com.stock.model.Scenario;
+import com.stock.model.SymbolStatus;
 import com.stock.model.UserData;
 import com.stock.model.WatchSymbol;
 import com.stock.services.CalculationService;
+import com.stock.services.SymbolService;
 import com.stock.yahoo.SymbolCurrentState;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
 public class OptimizerController {
-
+	
+private static Logger log = LogManager.getLogger(OptimizerController.class);
+	
   private static final String template = "Hello, %s!";
   private final AtomicLong counter = new AtomicLong();
 
   @Autowired
   CalculationService calculationService;
-
-  private static Logger logger = LogManager.getLogger(OptimizerController.class);
-
-
+  
+  @Autowired
+  SymbolService symbolService;
+  
+  
+  @GetMapping("/buy-list")
+  public @ResponseBody List<SymbolStatus> getRecommendedBuySymbols() {
+    return symbolService.getRecomendedBuySymbols();
+  }
+  
+  
   /**
    * Data extracted form finance.yahoo.com
    *
