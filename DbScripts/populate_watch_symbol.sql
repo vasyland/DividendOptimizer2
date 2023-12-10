@@ -5,10 +5,14 @@ INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper
 VALUES ('BCE.TO', '0.968', '6.45', '5.98', '2023-07-02');
 
 INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
-VALUES ('SU.TO', '0.52', '5.46', '4.7', '2023-07-02');
+VALUES ('SU.TO', '0.52', '5.55', '4.4', '2023-07-02');
 
-INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
-VALUES ('BNS.TO', '1.03', '6.43', '5.77', '2023-07-02');
+-- INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
+-- VALUES ('BNS.TO', '1.03', '6.43', '5.77', '2023-07-02');
+
+INSERT INTO `horse2`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
+VALUES ('BNS.TO', '1.059', '7.65', '6.94', '2023-12-05');
+
 
 INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
 VALUES ('CM.TO', '0.87', '6.1', '5.4', '2023-07-02');
@@ -60,3 +64,12 @@ VALUES ('CCA.TO', '0.776', '5.09', '5.09', '2023-07-02');
 
 INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
 VALUES ('BAC', '0.22', '3.17', '1.71', '2023-07-02');
+
+INSERT INTO `horse2`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
+VALUES ('CVE.TO', '.14', '2.5', '2', '2023-12-01');
+
+INSERT INTO `horse2`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
+VALUES ('FM.TO', '.08', '2.9', '1.83', '2023-12-05');
+
+INSERT INTO `horse2`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
+VALUES ('CVE.TO', '.14', '2.6', '1.94', '2023-12-05');
