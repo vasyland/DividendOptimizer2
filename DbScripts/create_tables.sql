@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `horse2`.`user` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO `horse2`.`user` (`email`, `first_name`, `last_name`, `created_on`) VALUES ('vasyland@gmail.com', 'Vas', 'Andrus', '2023-12-17');
-INSERT INTO `horse2`.`user` (`email`, `first_name`, `last_name`, `created_on`) VALUES ('rare.case.scenario@gmail.com', 'Rare', 'Case', '2023-12-17');
+INSERT INTO `horse2`.`user` (`email`, `first_name`, `last_name`, `created_on`) VALUES ('jim.moris@gmail.com', 'Jimmy', 'Moris', '2023-12-17');
+INSERT INTO `horse2`.`user` (`email`, `first_name`, `last_name`, `created_on`) VALUES ('ofra.gaza@gmail.com', 'Ofra', 'Gaza', '2023-12-17');
 INSERT INTO `horse2`.`user` (`email`, `first_name`, `last_name`, `created_on`) VALUES ('jerom@gotohome.com', 'Jerom', 'Liver', '2023-12-17');
 
 
