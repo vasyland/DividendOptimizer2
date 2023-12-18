@@ -8,5 +8,5 @@ import com.stock.model.Scenario;
 
 public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
 
-	Optional<Scenario> findScenarioById(Long id);
+	Optional<Scenario> findScenariosById(Long id);
 }

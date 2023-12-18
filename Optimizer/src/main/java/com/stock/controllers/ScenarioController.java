@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.stock.data.Symbol;
 import com.stock.model.Scenario;
 import com.stock.model.SymbolStatus;
 import com.stock.services.ScenarioService;
@@ -43,6 +42,44 @@ public class ScenarioController {
 		this.symbolService = symbolService;
 	}
 
+	@PostMapping("/add-scenario")
+	public ResponseEntity<Scenario> addScenario(@RequestBody Scenario s) {
+		Scenario scenario = scenarioService.addScenario(s);
+		return new ResponseEntity<>(scenario, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/update-scenario")
+	public ResponseEntity<Scenario> updateScenario(@RequestBody Scenario s) {
+		Scenario scenario = scenarioService.updateScenario(s);
+		return new ResponseEntity<>(scenario, HttpStatus.OK);
+	}
+	
+	//TODO: There is a dependency table 
+	@DeleteMapping("/delete-scenario/{id}")
+	public ResponseEntity<?> deleteScenario(@PathVariable("id") Long id) {
+		scenarioService.deleteScenario(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/scenario/{id}")
+	public ResponseEntity<Scenario> getScenarioById(@PathVariable("id") Long id) {
+		Scenario scenario = scenarioService.findScenarioById(id);
+		if (scenario == null) {
+		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+		}
+		return new ResponseEntity<>(scenario, HttpStatus.OK);
+	}
+	
+	@GetMapping("/allscenarios")
+	public ResponseEntity<List<Scenario>> getAllScenarios() {
+		List<Scenario> scenarios = scenarioService.findAll();
+//		if (scenarios == null || scenarios.size() == 0) {
+//		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+//		}
+		return new ResponseEntity<>(scenarios, HttpStatus.OK);
+	}	
+	
+	//TODO: ERROR - investigate and delete
 	@GetMapping("/process-symbols")
 	public ResponseEntity<List<String>> getProcessSymbols() {
 		List<String> s = symbolService.getSymbols();
@@ -62,41 +99,4 @@ public class ScenarioController {
 		//return new ResponseEntity<>(s, HttpStatus.OK);
 		return s;
 	}
-	
-	@GetMapping("/allscenarios")
-	public ResponseEntity<List<Scenario>> getAllScenarios() {
-		List<Scenario> scenarios = scenarioService.findAllScenarios();
-//		if (scenarios == null || scenarios.size() == 0) {
-//		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
-//		}
-		return new ResponseEntity<>(scenarios, HttpStatus.OK);
-	}
-	
-	@GetMapping("/scenario/{id}")
-	public ResponseEntity<Scenario> getScenariById(@PathVariable("id") Long id) {
-		Scenario scenario = scenarioService.findScenarioById(id);
-		if (scenario == null) {
-		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
-		}
-		return new ResponseEntity<>(scenario, HttpStatus.OK);
-	}
-	
-	@PostMapping("/add-scenario")
-	public ResponseEntity<Scenario> addScenario(@RequestBody Scenario s) {
-		Scenario scenario = scenarioService.addScenario(s);
-		return new ResponseEntity<>(scenario, HttpStatus.CREATED);
-	}
-	
-	@PutMapping("/update-scenario")
-	public ResponseEntity<Scenario> updateScenario(@RequestBody Scenario s) {
-		Scenario scenario = scenarioService.updateScenario(s);
-		return new ResponseEntity<>(scenario, HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/delete-scenario/{id}")
-	public ResponseEntity<?> deleteScenario(@PathVariable("id") Long id) {
-		scenarioService.deleteScenario(id);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
 }
