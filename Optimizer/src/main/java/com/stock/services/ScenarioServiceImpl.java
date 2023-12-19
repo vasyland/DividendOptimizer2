@@ -6,16 +6,21 @@ import org.springframework.stereotype.Service;
 
 import com.stock.exceptions.ScenarioNotFoundException;
 import com.stock.model.Scenario;
+import com.stock.model.ScenarioDetails;
+import com.stock.repositories.ScenarioDetailsRepository;
 import com.stock.repositories.ScenarioRepository;
 
 @Service
 public class ScenarioServiceImpl implements ScenarioService {
 
 	private final ScenarioRepository scenarioRepository;
-	
-	public ScenarioServiceImpl(ScenarioRepository scenarioRepository) {
+	private final ScenarioDetailsRepository scenarioDetailsRepository;
+
+	public ScenarioServiceImpl(ScenarioRepository scenarioRepository,
+			ScenarioDetailsRepository scenarioDetailsRepository) {
 		super();
 		this.scenarioRepository = scenarioRepository;
+		this.scenarioDetailsRepository = scenarioDetailsRepository;
 	}
 
 	@Override
@@ -43,5 +48,10 @@ public class ScenarioServiceImpl implements ScenarioService {
 	@Override
 	public void deleteScenario(Long scenario_id) {
 		scenarioRepository.deleteById(scenario_id);
+	}
+
+	@Override
+	public List<ScenarioDetails> getByScenarioIds(List<Long> idList) {
+		return scenarioDetailsRepository.getByScenarioIds(idList);
 	}	
 }

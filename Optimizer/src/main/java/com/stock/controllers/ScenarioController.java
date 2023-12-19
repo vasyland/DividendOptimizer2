@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.stock.model.Scenario;
+import com.stock.model.ScenarioDetails;
 import com.stock.model.SymbolStatus;
 import com.stock.services.ScenarioService;
 import com.stock.services.SymbolService;
@@ -42,6 +43,16 @@ public class ScenarioController {
 		this.symbolService = symbolService;
 	}
 
+	@GetMapping("/scenario-details/{ids}")
+	public ResponseEntity<List<ScenarioDetails>> getScenarioDetails(@PathVariable("ids") List<Long> ids) {
+		List<ScenarioDetails> scenarioDetails = scenarioService.getByScenarioIds(ids);
+//		if (scenarios == null || scenarios.size() == 0) {
+//		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+//		}
+		return new ResponseEntity<>(scenarioDetails, HttpStatus.OK);
+	}		
+	
+	
 	@PostMapping("/add-scenario")
 	public ResponseEntity<Scenario> addScenario(@RequestBody Scenario s) {
 		Scenario scenario = scenarioService.addScenario(s);

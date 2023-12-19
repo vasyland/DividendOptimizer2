@@ -58,4 +58,32 @@ ENGINE = InnoDB;
 INSERT INTO `horse2`.`scenario` (`user_id`, `scenario_name`, `invested_amount`, `available_cash`, `created_on`) VALUES ('1', 'Canadian Deptors', '178340.36', '18277.66', '2023-12-17');
 
 
+drop table horse2.scenario_details;
+
+CREATE TABLE IF NOT EXISTS `horse2`.`scenario_details` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `scenario_id` BIGINT NOT NULL,
+  `symbol` VARCHAR(15) NOT NULL COMMENT 'Stock symbol',
+  `shares` INT NOT NULL,
+  `action` VARCHAR(6) NOT NULL COMMENT 'Actions BOUGHT or SOLD',
+  `price` DECIMAL(16,2) NOT NULL COMMENT 'Average Price of shares bought',
+  `commisions` DECIMAL(6,2) NULL,
+  `action_date` DATETIME(6) NULL COMMENT 'When sold or bought',
+  `created_on` DATETIME(6) NULL,
+  `updated_on` DATETIME(6) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_scenario_details_scenario_idx` (`scenario_id` ASC) VISIBLE,
+  CONSTRAINT `fk_scenario_details_scenarios1`
+    FOREIGN KEY (`scenario_id`)
+    REFERENCES `horse2`.`scenario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+INSERT INTO `horse2`.`scenario_details` (`scenario_id`, `symbol`, `shares`, `action`, `price`, `commisions`, `action_date`, `created_on`) VALUES ('1', 'RY.TO', '300', 'Buy', '131.25', '9.95', '2023-12-18', '2023-12-18');
+INSERT INTO `horse2`.`scenario_details` (`scenario_id`, `symbol`, `shares`, `action`, `price`, `commisions`, `action_date`, `created_on`) VALUES ('1', 'BMO.TO', '1250', 'Sell', '86.95', '9.95', '2023-12-18', '2023-12-18');
+INSERT INTO `horse2`.`scenario_details` (`scenario_id`, `symbol`, `shares`, `action`, `price`, `commisions`, `action_date`, `created_on`) VALUES ('2', 'SU.TO', '2500', 'Hold', '46.25', '9.95', '2023-12-18', '2023-12-18');
+
+
+
 
