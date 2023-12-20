@@ -43,14 +43,21 @@ public class ScenarioController {
 		this.symbolService = symbolService;
 	}
 
-	@GetMapping("/scenario-details/{ids}")
-	public ResponseEntity<List<ScenarioDetails>> getScenarioDetails(@PathVariable("ids") List<Long> ids) {
-		List<ScenarioDetails> scenarioDetails = scenarioService.getByScenarioIds(ids);
-//		if (scenarios == null || scenarios.size() == 0) {
-//		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
-//		}
-		return new ResponseEntity<>(scenarioDetails, HttpStatus.OK);
-	}		
+//	@GetMapping("/scenario-details/{ids}")
+//	public ResponseEntity<List<ScenarioDetails>> getScenarioDetails(@PathVariable("ids") List<Long> ids) {
+//		List<ScenarioDetails> scenarioDetails = scenarioService.getByScenarioIds(ids);
+////		if (scenarios == null || scenarios.size() == 0) {
+////		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+////		}
+//		return new ResponseEntity<>(scenarioDetails, HttpStatus.OK);
+//	}		
+	
+	@PostMapping("/add-scenario-details")
+	public ResponseEntity<ScenarioDetails> addScenario(@RequestBody ScenarioDetails sd) {
+		ScenarioDetails s = scenarioService.addScenarioDetails(sd);
+		return new ResponseEntity<>(s, HttpStatus.CREATED);
+	}	
+	
 	
 	
 	@PostMapping("/add-scenario")

@@ -3,12 +3,15 @@ package com.stock.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,10 +22,12 @@ public class ScenarioDetails implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, updatable=false)
+	@Column(name="id", nullable=false, updatable=false)
 	private Long id;
-	@Column(name="SCENARIO_ID")
-	private Long scenario_id;
+	
+//	@Column(name="SCENARIO_ID")
+//	private Long scenario_id;
+	
 	@Column(name="SYMBOL")
 	private String symbol;
 	@Column(name="SHARES")
@@ -38,36 +43,23 @@ public class ScenarioDetails implements Serializable {
 	private LocalDateTime created_on;
 	@Column(name = "UPDATED_ON")
 	private LocalDateTime updated_on;
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="scenario_id")
+	private Scenario scenario;
+	
 	public ScenarioDetails() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public ScenarioDetails(Long id, Long scenario_id, String symbol, int shares, String action, BigDecimal price,
-			BigDecimal commisions, LocalDateTime action_date, LocalDateTime created_on, LocalDateTime updated_on) {
-		super();
-		this.id = id;
-		this.scenario_id = scenario_id;
-		this.symbol = symbol;
-		this.shares = shares;
-		this.action = action;
-		this.price = price;
-		this.commisions = commisions;
-		this.action_date = action_date;
-		this.created_on = created_on;
-		this.updated_on = updated_on;
-	}
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getScenario_id() {
-		return scenario_id;
-	}
-	public void setScenario_id(Long scenario_id) {
-		this.scenario_id = scenario_id;
-	}
+
 	public String getSymbol() {
 		return symbol;
 	}
@@ -116,12 +108,11 @@ public class ScenarioDetails implements Serializable {
 	public void setUpdated_on(LocalDateTime updated_on) {
 		this.updated_on = updated_on;
 	}
-	@Override
-	public String toString() {
-		return "ScenarioDetails [id=" + id + ", scenario_id=" + scenario_id + ", symbol=" + symbol + ", shares="
-				+ shares + ", action=" + action + ", price=" + price + ", commisions=" + commisions + ", action_date="
-				+ action_date + ", created_on=" + created_on + ", updated_on=" + updated_on + "]";
+	
+	public Scenario getScenario() {
+		return scenario;
 	}
-	
-	
+	public void setScenario(Scenario scenario) {
+		this.scenario = scenario;
+	}
 }

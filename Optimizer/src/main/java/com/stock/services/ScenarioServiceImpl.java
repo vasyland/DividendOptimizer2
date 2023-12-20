@@ -24,6 +24,11 @@ public class ScenarioServiceImpl implements ScenarioService {
 	}
 
 	@Override
+	public ScenarioDetails addScenarioDetails(ScenarioDetails sd) {
+		return scenarioDetailsRepository.save(sd);
+	}	
+	
+	@Override
 	public Scenario addScenario(Scenario scenario) {
 		return scenarioRepository.save(scenario);
 	}
@@ -50,8 +55,8 @@ public class ScenarioServiceImpl implements ScenarioService {
 		scenarioRepository.deleteById(scenario_id);
 	}
 
-	@Override
-	public List<ScenarioDetails> getByScenarioIds(List<Long> idList) {
-		return scenarioDetailsRepository.getByScenarioIds(idList);
-	}	
+//	@Override
+//	public List<ScenarioDetails> getByScenarioIds(List<Long> idList) {
+//		return scenarioDetailsRepository.getByScenarioIds(idList);
+//	}	
 }

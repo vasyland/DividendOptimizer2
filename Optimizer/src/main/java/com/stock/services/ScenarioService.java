@@ -11,5 +11,6 @@ public interface ScenarioService {
 	public void deleteScenario(Long id);
 	public Scenario findScenarioById(Long id);
 	
-	public List<ScenarioDetails> getByScenarioIds(List<Long> idList);
+	//public List<ScenarioDetails> getByScenarioIds(List<Long> idList);
+	public ScenarioDetails addScenarioDetails(ScenarioDetails scenarioDetails);
 }

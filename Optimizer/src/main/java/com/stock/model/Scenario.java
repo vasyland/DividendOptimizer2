@@ -3,12 +3,21 @@ package com.stock.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -27,8 +36,9 @@ public class Scenario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false, updatable=false)
 	private Long id;
+	
 	@Column(name="USER_ID")
-	private Long user_id;
+	private Long userId;
 	@Column(name="SCENARIO_NAME")
 	private String scenarioName;
 	@Column(name="INVESTED_AMOUNT")
@@ -40,20 +50,13 @@ public class Scenario implements Serializable {
 	@Column(name = "UPDATED_ON")
 	private LocalDateTime updatedOn;
 	
+	//@JsonIgnore
+	@JsonManagedReference
+	@OneToMany(mappedBy = "scenario", fetch = FetchType.EAGER)
+	private Set<ScenarioDetails> details;
+		
 	public Scenario() {
 		super();
-	}
-
-	public Scenario(Long id, Long user_id, String scenarioName, BigDecimal investedAmount, BigDecimal availableCash,
-			LocalDateTime createdOn, LocalDateTime updatedOn) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.scenarioName = scenarioName;
-		this.investedAmount = investedAmount;
-		this.availableCash = availableCash;
-		this.createdOn = createdOn;
-		this.updatedOn = updatedOn;
 	}
 
 	public Long getId() {
@@ -64,12 +67,12 @@ public class Scenario implements Serializable {
 		this.id = id;
 	}
 
-	public Long getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getScenarioName() {
@@ -112,12 +115,13 @@ public class Scenario implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	@Override
-	public String toString() {
-		return "Scenarios [id=" + id + ", user_id=" + user_id + ", scenarioName=" + scenarioName + ", investedAmount="
-				+ investedAmount + ", availableCash=" + availableCash + ", createdOn=" + createdOn + ", updatedOn="
-				+ updatedOn + "]";
+	public Set<ScenarioDetails> getDetails() {
+		return details;
 	}
-	
+
+	public void setDetails(Set<ScenarioDetails> details) {
+		this.details = details;
+	}
+
 	
 }
