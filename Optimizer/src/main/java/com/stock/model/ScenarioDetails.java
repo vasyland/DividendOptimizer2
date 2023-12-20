@@ -25,8 +25,8 @@ public class ScenarioDetails implements Serializable {
 	@Column(name="id", nullable=false, updatable=false)
 	private Long id;
 	
-//	@Column(name="SCENARIO_ID")
-//	private Long scenario_id;
+	@Column(name="SCENARIO_ID")
+	private Long scenario_id;
 	
 	@Column(name="SYMBOL")
 	private String symbol;
@@ -46,11 +46,19 @@ public class ScenarioDetails implements Serializable {
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="scenario_id")
+	@JoinColumn(name="scenario_id",referencedColumnName="id", insertable=false, updatable=false)
 	private Scenario scenario;
 	
 	public ScenarioDetails() {
 		super();
+	}
+
+	public Long getScenario_id() {
+		return scenario_id;
+	}
+
+	public void setScenario_id(Long scenario_id) {
+		this.scenario_id = scenario_id;
 	}
 
 	public Long getId() {
