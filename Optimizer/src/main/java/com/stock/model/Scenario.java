@@ -24,30 +24,30 @@ import jakarta.persistence.Table;
 /**
  * 
  * @author va
- * db: horse2 
+ *
  */
 @Entity
-@Table(name = "SCENARIO")
+@Table(name = "scenario")
 public class Scenario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false, updatable=false)
+	@Column(name="id", nullable=false, updatable=false)
 	private Long id;
 	
-	@Column(name="USER_ID")
+	@Column(name="user_id")
 	private Long userId;
-	@Column(name="SCENARIO_NAME")
+	@Column(name="scenario_name")
 	private String scenarioName;
-	@Column(name="INVESTED_AMOUNT")
+	@Column(name="invested_amount")
 	private BigDecimal investedAmount;
-	@Column(name="AVAILABLE_CASH")
+	@Column(name="available_cash")
 	private BigDecimal availableCash;
-	@Column(name = "CREATED_ON")
+	@Column(name = "created_on")
 	private LocalDateTime createdOn;
-	@Column(name = "UPDATED_ON")
+	@Column(name = "updated_on")
 	private LocalDateTime updatedOn;
 	
 	//@JsonIgnore

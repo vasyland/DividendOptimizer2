@@ -32,11 +32,16 @@ public class SymbolNativeRepository {
 //		+ "SELECT SYMBOL FROM watch_symbol) T "
 //		+ "GROUP BY symbol", nativeQuery=true);
 	    
-		Query sql3 = entityManager.createNativeQuery("SELECT SYMBOL FROM ("
-				+ "SELECT symbol FROM watch_symbol "
-				+ "UNION ALL "
-				+ "SELECT symbol FROM position) "
-				+ "T GROUP BY symbol");
+//		Query sql3 = entityManager.createNativeQuery("SELECT SYMBOL FROM ("
+//				+ "SELECT symbol FROM watch_symbol "
+//				+ "UNION ALL "
+//				+ "SELECT symbol FROM position) "
+//				+ "T GROUP BY symbol");
+
+		Query sql3 = entityManager.createNativeQuery("select symbol from ("
+				+ "select symbol from watch_symbol "
+				+ ") "
+				+ "t group by symbol");		
 		
 	    return sql3.getResultList();
 	}
@@ -47,18 +52,18 @@ public class SymbolNativeRepository {
 	 */
 	public List<SymbolStatus> getRecomendedBuySymbols() {
 		
-		Query sql = entityManager.createNativeQuery("SELECT SYMBOL, "
-				+ "CURRENT_PRICE, "
-				+ "QUOTERLY_DIVIDEND_AMOUNT, "
-				+ "CURRENT_YIELD, "
-				+ "UPPER_YIELD, "
-				+ "LOWER_YIELD, "
-				+ "ALLOWEDTOBUY_YIELD, "
-				+ "SELL_POINT_YIELD, "
-				+ "RECOMMENDED_ACTION, "
-				+ "UPDATED_ON "
-				+ "FROM SYMBOL_STATUS "
-				+ "WHERE RECOMMENDED_ACTION = 'Buy' ORDER BY SYMBOL");
+		Query sql = entityManager.createNativeQuery("select symbol, "
+				+ "current_price,"
+				+ "quaterly_dividend_amount, "
+				+ "current_yield, "
+				+ "upper_yield, "				
+				+ "lower_yield, "				
+				+ "allowedtobuy_yield, "
+				+ "sell_point_yield, "				
+				+ "recommended_action, "				
+				+ "updated_on "				
+				+ "from symbol_status "
+		        + "where recommended_action = 'Buy' order by symbol");		
 		
 	    return sql.getResultList();
 	}

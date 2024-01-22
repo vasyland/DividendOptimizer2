@@ -12,7 +12,7 @@ import com.stock.model.SymbolStatus;
 @Repository
 public interface SymbolStatusRepository extends JpaRepository<SymbolStatus, String> {
 
-	@Query(value="SELECT * FROM SYMBOL_STATUS WHERE RECOMMENDED_ACTION = :action", nativeQuery=true)
+	@Query(value="select * from symbol_status where recommended_action = :action", nativeQuery=true)
 	List<SymbolStatus> getSymbolsByRecommendedAction(@Param("action") String action);
 	
 }

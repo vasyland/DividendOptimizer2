@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SCENARIO_DETAILS")
+@Table(name = "scenario_details")
 public class ScenarioDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,23 +25,24 @@ public class ScenarioDetails implements Serializable {
 	@Column(name="id", nullable=false, updatable=false)
 	private Long id;
 	
-	@Column(name="SCENARIO_ID")
+	@Column(name="scenario_id")
 	private Long scenario_id;
 	
-	@Column(name="SYMBOL")
+	@Column(name="symbol")
 	private String symbol;
-	@Column(name="SHARES")
+	@Column(name="shares")
 	private int shares; 
-	@Column(name="ACTION")
+	@Column(name="action")
 	private String action;
-	@Column(name="PRICE")
+	@Column(name="price")
 	private BigDecimal price;
-	@Column(name="COMMISIONS")
+	@Column(name="commisions")
 	private BigDecimal commisions; 
+	@Column(name = "action_date")
 	private LocalDateTime action_date;
-	@Column(name = "CREATED_ON")
+	@Column(name = "created_on")
 	private LocalDateTime created_on;
-	@Column(name = "UPDATED_ON")
+	@Column(name = "updated_on")
 	private LocalDateTime updated_on;
 	
 	@JsonBackReference

@@ -21,23 +21,23 @@ public class Position extends AbstractPersistable<Long> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID", unique = true, nullable = false)
+  @Column(name = "id", unique = true, nullable = false)
   private Long id;
-  @Column(name = "USER")
+  @Column(name = "user")
   private String user;
-  @Column(name = "SYMBOL")
+  @Column(name = "symbol")
   private String symbol;
-  @Column(name = "SHARES")
+  @Column(name = "shares")
   private int shares;
-  @Column(name = "PRICE")
+  @Column(name = "price")
   private BigDecimal price;
-  @Column(name = "COMMISSION")
+  @Column(name = "commission")
   private BigDecimal commission;
-  @Column(name = "BUY_DATE")
+  @Column(name = "buy_date")
   private LocalDateTime buyDate;
-  @Column(name = "SOLD_DATE")
+  @Column(name = "sold_date")
   private LocalDateTime soldDate;
-  @Column(name = "UPDATED_ON")
+  @Column(name = "updated_on")
   private LocalDateTime updatedOn;
 
   public Position() {

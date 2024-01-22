@@ -8,17 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "USER_DATA")
+@Table(name = "user_data")
 public class UserData {
 
   @Id
-  @Column(name = "USER_ID")
+  @Column(name = "user_id")
   private Long userId;
-  @Column(name = "INVESTED_AMOUNT")
+  @Column(name = "invested_amount")
   private BigDecimal investedAmount;
-  @Column(name = "AVAILABLE_CASH")
+  @Column(name = "available_cash")
   private BigDecimal availableCash;
-  @Column(name = "UPDATED_ON")
+  @Column(name = "updated_on")
   private LocalDateTime updatedOn;
 
   public UserData() {
