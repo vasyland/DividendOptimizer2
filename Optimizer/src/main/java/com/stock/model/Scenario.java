@@ -3,21 +3,11 @@ package com.stock.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -39,21 +29,25 @@ public class Scenario implements Serializable {
 	
 	@Column(name="user_id")
 	private Long userId;
+	
 	@Column(name="scenario_name")
 	private String scenarioName;
+	
 	@Column(name="invested_amount")
 	private BigDecimal investedAmount;
-	@Column(name="available_cash")
-	private BigDecimal availableCash;
+	
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;
+	
 	@Column(name = "updated_on")
 	private LocalDateTime updatedOn;
 	
+	/* TODO: INclude all activities or average priced records to reduce traffic
+	 * Maybe I'll it in next life... ohhh! */
 	//@JsonIgnore
-	@JsonManagedReference
-	@OneToMany(mappedBy = "scenario", fetch = FetchType.EAGER)
-	private Set<ScenarioDetails> details;
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "scenario", fetch = FetchType.EAGER)
+//	private Set<Action> action;
 		
 	public Scenario() {
 		super();
@@ -91,14 +85,6 @@ public class Scenario implements Serializable {
 		this.investedAmount = investedAmount;
 	}
 
-	public BigDecimal getAvailableCash() {
-		return availableCash;
-	}
-
-	public void setAvailableCash(BigDecimal availableCash) {
-		this.availableCash = availableCash;
-	}
-
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -115,13 +101,5 @@ public class Scenario implements Serializable {
 		this.updatedOn = updatedOn;
 	}
 
-	public Set<ScenarioDetails> getDetails() {
-		return details;
-	}
 
-	public void setDetails(Set<ScenarioDetails> details) {
-		this.details = details;
-	}
-
-	
 }

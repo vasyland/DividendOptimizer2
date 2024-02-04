@@ -1,10 +1,15 @@
 package com.stock.services;
 
-import com.stock.model.UserData;
+import java.util.List;
+import com.stock.model.User;
 
 public interface UserService {
-
-  UserData saveUserData(UserData u);
-
-  UserData updateUserData(UserData u);
+	public User save(User u);
+	public List<User> findAll();	
+	public User updateUser(User u);
+	public void deleteById(Long id);
+	public User findById(Long id);
+	
+	//TODO: ?
+	//public User findByName(String n);
 }

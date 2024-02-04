@@ -15,8 +15,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "scenario_details")
-public class ScenarioDetails implements Serializable {
+@Table(name = "activity")
+public class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,28 +30,44 @@ public class ScenarioDetails implements Serializable {
 	
 	@Column(name="symbol")
 	private String symbol;
-	@Column(name="shares")
-	private int shares; 
-	@Column(name="action")
-	private String action;
+	
+	@Column(name="quantity")
+	private int quantity;
+	
+	@Column(name="activity")
+	private String activity;
+	
 	@Column(name="price")
 	private BigDecimal price;
+	
 	@Column(name="commisions")
 	private BigDecimal commisions; 
-	@Column(name = "action_date")
-	private LocalDateTime action_date;
+	
+	@Column(name="currency")
+	private String currency;
+	
+	@Column(name = "activity_date")
+	private LocalDateTime activity_date;
+	
 	@Column(name = "created_on")
 	private LocalDateTime created_on;
-	@Column(name = "updated_on")
-	private LocalDateTime updated_on;
+
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="scenario_id",referencedColumnName="id", insertable=false, updatable=false)
 	private Scenario scenario;
 	
-	public ScenarioDetails() {
+	public Action() {
 		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getScenario_id() {
@@ -62,66 +78,83 @@ public class ScenarioDetails implements Serializable {
 		this.scenario_id = scenario_id;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getSymbol() {
 		return symbol;
 	}
+
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public int getShares() {
-		return shares;
+
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setShares(int shares) {
-		this.shares = shares;
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-	public String getAction() {
-		return action;
+
+	public String getActivity() {
+		return activity;
 	}
-	public void setAction(String action) {
-		this.action = action;
+
+	public void setActivity(String activity) {
+		this.activity = activity;
 	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
+
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
 	public BigDecimal getCommisions() {
 		return commisions;
 	}
+
 	public void setCommisions(BigDecimal commisions) {
 		this.commisions = commisions;
 	}
-	public LocalDateTime getAction_date() {
-		return action_date;
+
+	public String getCurrency() {
+		return currency;
 	}
-	public void setAction_date(LocalDateTime action_date) {
-		this.action_date = action_date;
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
+
+	public LocalDateTime getActivity_date() {
+		return activity_date;
+	}
+
+	public void setActivity_date(LocalDateTime activity_date) {
+		this.activity_date = activity_date;
+	}
+
 	public LocalDateTime getCreated_on() {
 		return created_on;
 	}
+
 	public void setCreated_on(LocalDateTime created_on) {
 		this.created_on = created_on;
 	}
-	public LocalDateTime getUpdated_on() {
-		return updated_on;
-	}
-	public void setUpdated_on(LocalDateTime updated_on) {
-		this.updated_on = updated_on;
-	}
-	
+
 	public Scenario getScenario() {
 		return scenario;
 	}
+
 	public void setScenario(Scenario scenario) {
 		this.scenario = scenario;
+	}
+
+	@Override
+	public String toString() {
+		return "Action [id=" + id + ", scenario_id=" + scenario_id + ", symbol=" + symbol + ", quantity=" + quantity
+				+ ", activity=" + activity + ", price=" + price + ", commisions=" + commisions + ", currency="
+				+ currency + ", activity_date=" + activity_date + ", created_on=" + created_on + ", scenario="
+				+ scenario + "]";
 	}
 }

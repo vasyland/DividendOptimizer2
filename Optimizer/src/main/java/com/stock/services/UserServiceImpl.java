@@ -1,41 +1,58 @@
 package com.stock.services;
 
 import java.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 import org.springframework.stereotype.Service;
-import com.stock.model.UserData;
-import com.stock.repositories.UserDataRepository;
+import com.stock.exceptions.ScenarioNotFoundException;
+import com.stock.model.User;
+import com.stock.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-  private final UserDataRepository userDataRepository;
+	private final UserRepository userRepository;
 
-  @Autowired
-  public UserServiceImpl(final UserDataRepository userDataRepository) {
-    super();
-    this.userDataRepository = userDataRepository;
-  }
+	public UserServiceImpl(final UserRepository userRepository) {
+		super();
+		this.userRepository = userRepository;
+	}
 
-  @Override
-  public UserData saveUserData(final UserData u) {
-    UserData userData = new UserData();
-    return userDataRepository.save(u);
-  }
+	@Override
+	public List<User> findAll() {
+		return (List<User>) userRepository.findAll();
+	}
+	
+	@Override
+	public User save(final User u) {
+		return userRepository.save(u);
+	}
 
-  /**
-   * Update existing user data
-   */
-  @Override
-  public UserData updateUserData(final UserData u) {
-    UserData existingUserData = userDataRepository.findById(u.getUserId()).orElse(null);
-    if (existingUserData == null) {
-      return userDataRepository.save(u);
-    }
-    existingUserData.setInvestedAmount(u.getInvestedAmount());
-    existingUserData.setAvailableCash(u.getAvailableCash());
-    existingUserData.setUpdatedOn(LocalDateTime.now());
-    return userDataRepository.save(existingUserData);
-  }
+	/**
+	 * Update existing user data
+	 */
+	@Override
+	public User updateUser(final User u) {
+		User existingUser = userRepository.findById(u.getUserId()).orElse(null);
+		if (existingUser == null) {
+			return userRepository.save(u);
+		}
+		existingUser.setEmail(u.getEmail());
+		existingUser.setFirstName(u.getFirstName());
+		existingUser.setLastName(u.getLastName());
+		existingUser.setUserName(u.getUserName());
+		existingUser.setPassword(u.getPassword());
+		existingUser.setUpdatedOn(LocalDateTime.now());
+		return userRepository.save(existingUser);
+	}
 
+	@Override
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);
+	}
+
+	@Override
+	public User findById(Long id) {
+		return userRepository.findById(id)
+				.orElseThrow(() -> new ScenarioNotFoundException("User by id " + id + " was not found"));
+	}
 }

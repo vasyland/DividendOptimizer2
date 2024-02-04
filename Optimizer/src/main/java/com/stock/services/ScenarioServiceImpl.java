@@ -6,57 +6,42 @@ import org.springframework.stereotype.Service;
 
 import com.stock.exceptions.ScenarioNotFoundException;
 import com.stock.model.Scenario;
-import com.stock.model.ScenarioDetails;
-import com.stock.repositories.ScenarioDetailsRepository;
 import com.stock.repositories.ScenarioRepository;
 
 @Service
 public class ScenarioServiceImpl implements ScenarioService {
 
 	private final ScenarioRepository scenarioRepository;
-	private final ScenarioDetailsRepository scenarioDetailsRepository;
 
-	public ScenarioServiceImpl(ScenarioRepository scenarioRepository,
-			ScenarioDetailsRepository scenarioDetailsRepository) {
+	public ScenarioServiceImpl(ScenarioRepository scenarioRepository) {
 		super();
 		this.scenarioRepository = scenarioRepository;
-		this.scenarioDetailsRepository = scenarioDetailsRepository;
 	}
 
 	@Override
-	public ScenarioDetails addScenarioDetails(ScenarioDetails sd) {
-		return scenarioDetailsRepository.save(sd);
-	}	
-	
-	@Override
-	public Scenario addScenario(Scenario scenario) {
-		return scenarioRepository.save(scenario);
+	public Scenario save(Scenario s) {
+		return scenarioRepository.save(s);
 	}
 
 	@Override
 	public List<Scenario> findAll() {
-		return scenarioRepository.findAll();
+		return (List<Scenario>) scenarioRepository.findAll();
 	}
 
 	@Override
-	public Scenario updateScenario(Scenario scenario) {
-		return scenarioRepository.save(scenario);
+	public Scenario update(Scenario s) {
+		return scenarioRepository.save(s);
 	}
 
 	@Override
-	public Scenario findScenarioById(Long id) {
+	public Scenario findById(Long id) {
 		return scenarioRepository
 				.findById(id)
 				.orElseThrow(() -> new ScenarioNotFoundException("Scenario by id " + id + " was not found"));
 	}
 
 	@Override
-	public void deleteScenario(Long scenario_id) {
-		scenarioRepository.deleteById(scenario_id);
+	public void deleteById(Long id) {
+		scenarioRepository.deleteById(id);
 	}
-
-//	@Override
-//	public List<ScenarioDetails> getByScenarioIds(List<Long> idList) {
-//		return scenarioDetailsRepository.getByScenarioIds(idList);
-//	}	
 }

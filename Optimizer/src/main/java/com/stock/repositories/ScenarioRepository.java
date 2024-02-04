@@ -1,12 +1,8 @@
 package com.stock.repositories;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.stock.model.Scenario;
 
-public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
-
-	Optional<Scenario> findScenariosById(Long id);
+public interface ScenarioRepository extends CrudRepository<Scenario, Long> {
 }

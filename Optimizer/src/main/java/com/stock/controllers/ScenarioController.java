@@ -20,17 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.stock.model.Scenario;
-import com.stock.model.ScenarioDetails;
 import com.stock.model.SymbolStatus;
 import com.stock.services.ScenarioService;
 import com.stock.services.SymbolService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api")
+@RequestMapping("/api/scenario")
 public class ScenarioController {
 
-	private static Logger logger = LogManager.getLogger(ScenarioController.class);
+	private static Logger log = LogManager.getLogger(ScenarioController.class);
 	
 	@Autowired
 	private final SymbolService symbolService;
@@ -52,43 +51,46 @@ public class ScenarioController {
 //		return new ResponseEntity<>(scenarioDetails, HttpStatus.OK);
 //	}		
 	
-	@PostMapping("/add-scenario-details")
-	public ResponseEntity<ScenarioDetails> addScenario(@RequestBody ScenarioDetails sd) {
-		ScenarioDetails s = scenarioService.addScenarioDetails(sd);
-		return new ResponseEntity<>(s, HttpStatus.CREATED);
-	}	
+//	@PostMapping("/add-scenario-details")
+//	public ResponseEntity<Action> addScenario(@RequestBody Action sd) {
+//		Action s = scenarioService.addScenarioDetails(sd);
+//		return new ResponseEntity<>(s, HttpStatus.CREATED);
+//	}	
 	
-	
-	
-	@PostMapping("/add-scenario")
+	@PostMapping("/add")
 	public ResponseEntity<Scenario> addScenario(@RequestBody Scenario s) {
-		Scenario scenario = scenarioService.addScenario(s);
+		Scenario scenario = scenarioService.save(s);
 		return new ResponseEntity<>(scenario, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update-scenario")
+	@PutMapping("/update")
 	public ResponseEntity<Scenario> updateScenario(@RequestBody Scenario s) {
-		Scenario scenario = scenarioService.updateScenario(s);
+		Scenario scenario = scenarioService.update(s);
 		return new ResponseEntity<>(scenario, HttpStatus.OK);
 	}
 	
 	//TODO: There is a dependency table 
-	@DeleteMapping("/delete-scenario/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteScenario(@PathVariable("id") Long id) {
-		scenarioService.deleteScenario(id);
+		scenarioService.deleteById(id);
+		log.info("Scenario id = " + id + " was deleted.");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/scenario/{id}")
+	@GetMapping("/find/{id}")
 	public ResponseEntity<Scenario> getScenarioById(@PathVariable("id") Long id) {
-		Scenario scenario = scenarioService.findScenarioById(id);
+		Scenario scenario = scenarioService.findById(id);
 		if (scenario == null) {
 		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
 		}
 		return new ResponseEntity<>(scenario, HttpStatus.OK);
 	}
 	
-	@GetMapping("/allscenarios")
+	/**
+	 * Getting all user scenarios with details
+	 * @return
+	 */
+	@GetMapping("/all")
 	public ResponseEntity<List<Scenario>> getAllScenarios() {
 		List<Scenario> scenarios = scenarioService.findAll();
 //		if (scenarios == null || scenarios.size() == 0) {
