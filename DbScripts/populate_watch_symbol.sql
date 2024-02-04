@@ -1,3 +1,4 @@
+//TODO: review and recalculate for a new bank rate
 INSERT INTO `horse`.`watch_symbol` (`symbol`, `quoterly_dividend_amount`, `upper_yield`, `lower_yield`, `updated_on`) 
 VALUES ('ENB.TO', '0.8875', '7.24', '6.4', '2023-07-02');
 
