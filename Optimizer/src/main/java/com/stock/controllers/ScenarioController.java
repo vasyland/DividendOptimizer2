@@ -77,7 +77,7 @@ public class ScenarioController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/find/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Scenario> getScenarioById(@PathVariable("id") Long id) {
 		Scenario scenario = scenarioService.findById(id);
 		if (scenario == null) {

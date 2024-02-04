@@ -8,12 +8,12 @@ Back-end service for the iWS web site
 2. Design decision page
 3. Build Decision Service for Decision page
 4. Things about Admin override events (holidays, Fed and Bank of Canada Meetings)
-5. Fix the error when no positions
 ```
 
-##App start
+##Project setup
 ```
-C:\Tools\jdk-17.0.2\bin\java.exe -jar C:\AV\WorkProjects\DividendOptimizer2\Optimizer\build\libs\divoptimizer-1.0.0.jar
+Gradle version: 8.1.1
+Java Version: jdk-17.0.2
 ```
 
 ##Build
@@ -21,47 +21,34 @@ C:\Tools\jdk-17.0.2\bin\java.exe -jar C:\AV\WorkProjects\DividendOptimizer2\Opti
 Command line: gradle clean bootJar
 ```
 
-##Project setup
-Gradle version: 8.1.1
-Java Version: jdk-17.0.2
+##App start
+```
+C:\Tools\jdk-17.0.2\bin\java.exe -jar C:\AV\WorkProjects\DividendOptimizer2\Optimizer\build\libs\divoptimizer-1.0.0.jar
+```
 
-Decision data
-http://localhost:8586/api/decision-data
+##User Points
+```
+http://localhost:8587/api/user/all
+http://localhost:8587/api/user/add
+```
 
-User Data
-http://localhost:8586/api/user-data
-http://localhost:8587/api/user-data
-
-A working list of symbols
-http://localhost:8586/api/watch-symbols
-
-Data downloaded from Yahoo based on working list of symbols
-http://localhost:8586/api/symbol-current-state
-
-Current positions (shares)
-http://localhost:8586/api/positions
-
-User Current positions with average price
-http://localhost:8586/api/user-current-positions
-
-All scenarios
-http://localhost:8586/api/allscenarios
-http://localhost:8586/api/scenario/1
-
-Delete Scenario
-http://localhost:8586/api/delete-scenario/1
-
-http://localhost:8586/api/add-scenario POST
-con.setRequestProperty("Content-Type", "application/json; charset=utf8")
-{
-    "investedAmount": 255068.20,
-    "availableCash": 557.32,
-    "updatedOn": "2023-11-01T19:17:44",
-    "id": 1
-}
+##Scenarios Points
+```
+http://localhost:8587/api/scenario/all
+http://localhost:8587/api/scenario/2
+http://localhost:8587/api/scenario/add
+http://localhost:8587/api/scenario/update
+http://localhost:8587/api/scenario/delete/2  - TODO: needs response
+```
 
 ##Usefull Links
 ```
 https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#publishing-your-application
+
+Default Time stamps
+https://thorben-janssen.com/persist-creation-update-timestamps-hibernate/
+https://stackoverflow.com/questions/811845/setting-a-jpa-timestamp-column-to-be-generated-by-the-database
+https://stackoverflow.com/questions/5571323/mysql-on-update-current-timestamp-not-updating
+https://hackmd.io/@8q7xEB2oT4yhx1uwmt34bg/H1Kkaz0ft
 ```
 
