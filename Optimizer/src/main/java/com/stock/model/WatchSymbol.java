@@ -23,7 +23,7 @@ public class WatchSymbol {
   private BigDecimal upperYield;
   @Column(name = "lower_yield")
   private BigDecimal lowerYield;
-  @Column(name = "UPDATED_ON")
+  @Column(name = "updated_on")
   private LocalDateTime updatedOn;
 
   public WatchSymbol() {

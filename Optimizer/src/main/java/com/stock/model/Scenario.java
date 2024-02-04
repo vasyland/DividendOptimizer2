@@ -3,13 +3,16 @@ package com.stock.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 
 /**
  * 
@@ -21,38 +24,35 @@ import jakarta.persistence.Table;
 public class Scenario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable=false, updatable=false)
+	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
-	
-	@Column(name="user_id")
+
+	@Column(name = "user_id")
 	private Long userId;
-	
-	@Column(name="scenario_name")
+
+	@Column(name = "scenario_name")
 	private String scenarioName;
-	
-	@Column(name="invested_amount")
+
+	@Column(name = "invested_amount")
 	private BigDecimal investedAmount;
-	
+
 	@Column(name = "created_on")
+	@CreationTimestamp
 	private LocalDateTime createdOn;
-	
+
 	@Column(name = "updated_on")
+	@UpdateTimestamp
 	private LocalDateTime updatedOn;
-	
-	/* TODO: INclude all activities or average priced records to reduce traffic
-	 * Maybe I'll it in next life... ohhh! */
-	//@JsonIgnore
-//	@JsonManagedReference
-//	@OneToMany(mappedBy = "scenario", fetch = FetchType.EAGER)
-//	private Set<Action> action;
-		
+
 	public Scenario() {
 		super();
 	}
 
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -100,6 +100,4 @@ public class Scenario implements Serializable {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
-
-
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.stock.model.Scenario;
 import com.stock.model.User;
 import com.stock.services.UserService;
 
@@ -34,18 +33,18 @@ public class UserController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<User> addScenario(@RequestBody User u) {
+	public ResponseEntity<User> save(@RequestBody User u) {
 		User user = userService.save(u);
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/update")
-	public User updateUser(@RequestBody final User u) {
-		return userService.updateUser(u);
+	public User update(@RequestBody final User u) {
+		return userService.update(u);
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<User>> getAllUsers() {
+	public ResponseEntity<List<User>> getAll() {
 		List<User> users = userService.findAll();
 //		if (users == null || users.size() == 0) {
 //		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
@@ -54,8 +53,8 @@ public class UserController {
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 	
-	@GetMapping("/find/{id}")
-	public ResponseEntity<User> getScenarioById(@PathVariable("id") Long id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<User> getById(@PathVariable("id") Long id) {
 		User user = userService.findById(id);
 		if (user == null) {
 		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");

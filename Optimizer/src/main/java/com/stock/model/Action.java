@@ -3,19 +3,18 @@ package com.stock.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "action")
 public class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -50,26 +49,24 @@ public class Action implements Serializable {
 	private LocalDateTime activity_date;
 	
 	@Column(name = "created_on")
+	@CreationTimestamp
 	private LocalDateTime created_on;
 
 	
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="scenario_id",referencedColumnName="id", insertable=false, updatable=false)
-	private Scenario scenario;
+//	@JsonBackReference
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name="scenario_id",referencedColumnName="id", insertable=false, updatable=false)
+//	private Scenario scenario;
 	
 	public Action() {
 		super();
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public Long getScenario_id() {
 		return scenario_id;
 	}
@@ -140,21 +137,5 @@ public class Action implements Serializable {
 
 	public void setCreated_on(LocalDateTime created_on) {
 		this.created_on = created_on;
-	}
-
-	public Scenario getScenario() {
-		return scenario;
-	}
-
-	public void setScenario(Scenario scenario) {
-		this.scenario = scenario;
-	}
-
-	@Override
-	public String toString() {
-		return "Action [id=" + id + ", scenario_id=" + scenario_id + ", symbol=" + symbol + ", quantity=" + quantity
-				+ ", activity=" + activity + ", price=" + price + ", commisions=" + commisions + ", currency="
-				+ currency + ", activity_date=" + activity_date + ", created_on=" + created_on + ", scenario="
-				+ scenario + "]";
 	}
 }

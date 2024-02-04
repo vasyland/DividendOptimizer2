@@ -1,11 +1,15 @@
 package com.stock.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -16,8 +20,9 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "user_id")
-	private Long userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", nullable=false, updatable=false)
+	private Long id;
 
 	@Column(name = "email")
 	private String email;
@@ -35,17 +40,19 @@ public class User implements Serializable {
 	private String password;
 
 	@Column(name = "created_on")
+	@CreationTimestamp
 	private LocalDateTime createdOn;
 
 	@Column(name = "updated_on")
+	@UpdateTimestamp
 	private LocalDateTime updatedOn;
 
-	public Long getUserId() {
-		return userId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -103,4 +110,6 @@ public class User implements Serializable {
 	public void setUpdatedOn(LocalDateTime updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+	
+	
 }

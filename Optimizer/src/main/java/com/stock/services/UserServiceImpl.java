@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
 	 * Update existing user data
 	 */
 	@Override
-	public User updateUser(final User u) {
-		User existingUser = userRepository.findById(u.getUserId()).orElse(null);
+	public User update(final User u) {
+		User existingUser = userRepository.findById(u.getId()).orElse(null);
 		if (existingUser == null) {
 			return userRepository.save(u);
 		}
