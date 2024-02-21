@@ -39,7 +39,10 @@ public class Scenario implements Serializable {
 	@Column(name = "invested_amount")
 	private BigDecimal investedAmount;
 
-	@Column(name = "created_on")
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "created_on", updatable=false)
 	@CreationTimestamp
 	private LocalDateTime createdOn;
 
@@ -50,8 +53,6 @@ public class Scenario implements Serializable {
 	public Scenario() {
 		super();
 	}
-
-	
 	
 	public Long getId() {
 		return id;
@@ -83,6 +84,14 @@ public class Scenario implements Serializable {
 
 	public void setInvestedAmount(BigDecimal investedAmount) {
 		this.investedAmount = investedAmount;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public LocalDateTime getCreatedOn() {

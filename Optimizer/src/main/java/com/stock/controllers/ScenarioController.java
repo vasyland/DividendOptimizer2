@@ -42,21 +42,6 @@ public class ScenarioController {
 		this.symbolService = symbolService;
 	}
 
-//	@GetMapping("/scenario-details/{ids}")
-//	public ResponseEntity<List<ScenarioDetails>> getScenarioDetails(@PathVariable("ids") List<Long> ids) {
-//		List<ScenarioDetails> scenarioDetails = scenarioService.getByScenarioIds(ids);
-////		if (scenarios == null || scenarios.size() == 0) {
-////		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
-////		}
-//		return new ResponseEntity<>(scenarioDetails, HttpStatus.OK);
-//	}		
-	
-//	@PostMapping("/add-scenario-details")
-//	public ResponseEntity<Action> addScenario(@RequestBody Action sd) {
-//		Action s = scenarioService.addScenarioDetails(sd);
-//		return new ResponseEntity<>(s, HttpStatus.CREATED);
-//	}	
-	
 	@PostMapping("/add")
 	public ResponseEntity<Scenario> addScenario(@RequestBody Scenario s) {
 		Scenario scenario = scenarioService.save(s);
@@ -69,9 +54,12 @@ public class ScenarioController {
 		return new ResponseEntity<>(scenario, HttpStatus.OK);
 	}
 	
-	//TODO: There is a dependency table 
+	/* TODO: There is a dependency table */ 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteScenario(@PathVariable("id") Long id) {
+		
+		/* Check existing Action transactions for this scenario */
+		
 		scenarioService.deleteById(id);
 		log.info("Scenario id = " + id + " was deleted.");
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -98,6 +86,21 @@ public class ScenarioController {
 //		}
 		return new ResponseEntity<>(scenarios, HttpStatus.OK);
 	}	
+	
+	/* 
+	 * Find all scenarios by user id 
+	 * */
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<List<Scenario>> getByUserId(@PathVariable("userId") Long userId) {
+		List<Scenario> scenarios = scenarioService.findByUserId(userId);
+		if (scenarios == null || scenarios.size() == 0) {
+		      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
+		}
+		return new ResponseEntity<>(scenarios, HttpStatus.OK);
+	}		
+	
+	
+	
 	
 	//TODO: ERROR - investigate and delete
 	@GetMapping("/process-symbols")

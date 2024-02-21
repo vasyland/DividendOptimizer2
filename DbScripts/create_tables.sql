@@ -1,8 +1,8 @@
-drop table action;
-drop table scenario;
-drop table user;
+drop table horse2.action;
+drop table horse2.scenario;
+drop table horse2.user;
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT 'User Id',
   `email` VARCHAR(45) NOT NULL,
   `first_name` VARCHAR(45) NULL,
@@ -11,17 +11,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(15) NOT NULL,
   `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updated_on` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `updated_on_UNIQUE` (`updated_on` ASC) VISIBLE)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `scenario` (
+CREATE TABLE `scenario` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
-  `scenario_name` VARCHAR(45) NULL COMMENT 'Some meaningfull description or name',
+  `scenario_name` VARCHAR(45) NOT NULL COMMENT 'Some meaningfull description or name',
   `invested_amount` DECIMAL(16,2) NULL,
-  `created_on` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updated_on` DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  `description` VARCHAR(1000) NULL,
+  `created_on` DATETIME  DEFAULT CURRENT_TIMESTAMP COMMENT 'creation time',
+  `updated_on` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_scenario_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_scenario_user1`
@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `scenario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `horse2`.`action` (
+
+CREATE TABLE `action` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `scenario_id` BIGINT NOT NULL,
   `symbol` VARCHAR(15) NOT NULL COMMENT 'Stock symbol',
@@ -50,4 +51,3 @@ CREATE TABLE IF NOT EXISTS `horse2`.`action` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
